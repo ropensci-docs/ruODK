@@ -1,0 +1,12 @@
+{
+  "commit": {
+    "commit": "be93a1db4e949dd653d25152949c36066944b6a5",
+    "author": "Florian Mayer <Florian.Mayer@dbca.wa.gov.au>",
+    "time": "2021-06-29 04:52:57",
+    "files": 4,
+    "merge": false,
+    "message": "Modify some vcr tests\n"
+  },
+  "remote": "https://github.com/ropensci/ruODK",
+  "pkg": "ruODK"
+}
