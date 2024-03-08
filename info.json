@@ -1,0 +1,12 @@
+{
+  "commit": {
+    "commit": "e2d452d437f0e57c4ea8d5524ce3fb4b90e05b4d",
+    "author": "Florian Mayer <florian.mayer@dpc.wa.gov.au>",
+    "time": "2024-03-08 05:31:43",
+    "files": 66,
+    "merge": false,
+    "message": "Update links to ODK Central API docs\n\n* Docs have moved to the main ODK docs\n"
+  },
+  "repo": "https://github.com/ropensci/ruODK",
+  "pkg": "ruODK"
+}

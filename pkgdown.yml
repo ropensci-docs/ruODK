@@ -1,0 +1,14 @@
+pandoc: 2.16.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  comparison: comparison.html
+  odata-api: odata-api.html
+  restful-api: restful-api.html
+  setup: setup.html
+  spatial: spatial.html
+last_built: 2024-03-08T06:27Z
+urls:
+  reference: https://docs.ropensci.org/ruODK/reference
+  article: https://docs.ropensci.org/ruODK/articles
+
