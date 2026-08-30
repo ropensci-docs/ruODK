@@ -1,0 +1,100 @@
+# Parse a form_schema into a tibble of fields with name, type, and path.
+
+**\[stable\]**
+
+## Usage
+
+``` r
+form_schema_parse(fs, path = "Submissions", verbose = get_ru_verbose())
+```
+
+## Arguments
+
+- fs:
+
+  The output of form_schema as nested list
+
+- path:
+
+  The base path for form fields. Default: "Submissions".
+  `form_schema_parse` recursively steps into deeper nesting levels,
+  which are reflected as separate OData tables. The returned value in
+  `path` reflects the XForms group name, which translates to separate
+  screens in ODK Collect. Non-repeating form groups will be flattened
+  out into the main Submissions table. Repeating groups are available as
+  separate OData tables.
+
+- verbose:
+
+  Whether to display debug messages or not.
+
+  Read
+  [`vignette("setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.md)
+  to learn how `ruODK`'s verbosity can be set globally or per function.
+
+## Details
+
+This function is used by
+[`form_schema`](https://docs.ropensci.org/ruODK/reference/form_schema.md)
+for older versions of ODK Central (pre 0.8). These return the form
+schema as XML, requiring the quite involved code of `form_schema_parse`,
+while newer ODK Central versions return JSON, which is parsed directly
+in
+[`form_schema`](https://docs.ropensci.org/ruODK/reference/form_schema.md).
+
+The `form_schema` returned from ODK Central versions \< 0.8 is a nested
+list of lists containing the form definition. The form definition
+consists of fields (with a type and name), and form groups, which are
+rendered as separate ODK Collect screens. Form groups in turn can also
+contain form fields.
+
+`form_schema_parse` recursively unpacks the form and extracts the name
+and type of each field. This information then informs
+[`handle_ru_attachments`](https://docs.ropensci.org/ruODK/reference/handle_ru_attachments.md),
+[`handle_ru_datetimes`](https://docs.ropensci.org/ruODK/reference/handle_ru_datetimes.md),
+[`handle_ru_geopoints`](https://docs.ropensci.org/ruODK/reference/handle_ru_geopoints.md),
+[`handle_ru_geotraces`](https://docs.ropensci.org/ruODK/reference/handle_ru_geotraces.md),
+and
+[`handle_ru_geoshapes`](https://docs.ropensci.org/ruODK/reference/handle_ru_geoshapes.md).
+
+## See also
+
+Other utilities:
+[`attachment_get()`](https://docs.ropensci.org/ruODK/reference/attachment_get.md),
+[`attachment_link()`](https://docs.ropensci.org/ruODK/reference/attachment_link.md),
+[`attachment_url()`](https://docs.ropensci.org/ruODK/reference/attachment_url.md),
+[`drop_null_coords()`](https://docs.ropensci.org/ruODK/reference/drop_null_coords.md),
+[`get_one_attachment()`](https://docs.ropensci.org/ruODK/reference/get_one_attachment.md),
+[`get_one_submission()`](https://docs.ropensci.org/ruODK/reference/get_one_submission.md),
+[`get_one_submission_att_list()`](https://docs.ropensci.org/ruODK/reference/get_one_submission_att_list.md),
+[`get_one_submission_audit()`](https://docs.ropensci.org/ruODK/reference/get_one_submission_audit.md),
+[`handle_ru_attachments()`](https://docs.ropensci.org/ruODK/reference/handle_ru_attachments.md),
+[`handle_ru_datetimes()`](https://docs.ropensci.org/ruODK/reference/handle_ru_datetimes.md),
+[`handle_ru_geopoints()`](https://docs.ropensci.org/ruODK/reference/handle_ru_geopoints.md),
+[`handle_ru_geoshapes()`](https://docs.ropensci.org/ruODK/reference/handle_ru_geoshapes.md),
+[`handle_ru_geotraces()`](https://docs.ropensci.org/ruODK/reference/handle_ru_geotraces.md),
+[`isodt_to_local()`](https://docs.ropensci.org/ruODK/reference/isodt_to_local.md),
+[`odata_submission_rectangle()`](https://docs.ropensci.org/ruODK/reference/odata_submission_rectangle.md),
+[`predict_ruodk_name()`](https://docs.ropensci.org/ruODK/reference/predict_ruodk_name.md),
+[`prepend_uuid()`](https://docs.ropensci.org/ruODK/reference/prepend_uuid.md),
+[`split_geopoint()`](https://docs.ropensci.org/ruODK/reference/split_geopoint.md),
+[`split_geoshape()`](https://docs.ropensci.org/ruODK/reference/split_geoshape.md),
+[`split_geotrace()`](https://docs.ropensci.org/ruODK/reference/split_geotrace.md),
+[`strip_uuid()`](https://docs.ropensci.org/ruODK/reference/strip_uuid.md),
+[`tidyeval`](https://docs.ropensci.org/ruODK/reference/tidyeval.md),
+[`unnest_all()`](https://docs.ropensci.org/ruODK/reference/unnest_all.md)
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Option 1: in two steps, ODKC Version 0.7
+fs <- form_schema(flatten = FALSE, parse = FALSE, odkc_version = 0.7)
+fsp <- form_schema_parse(fs)
+
+# Option 2: in one go
+fsp <- form_schema(parse = TRUE)
+
+fsp
+} # }
+```
