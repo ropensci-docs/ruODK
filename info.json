@@ -1,0 +1,13 @@
+{
+  "commit": {
+    "commit": "06022294276fb3a5f08790c91ad6ecae51196a4b",
+    "author": "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>",
+    "time": "2026-11-24T02:51:41Z",
+    "files": 6,
+    "merge": false,
+    "message": "Bump ODK Central to v2026.3.2 (pyxform-http v4.5.0) (#190)\n\n* Bump ODK Central image pins (v2026.3.2, pyxform-http v4.5.0)\n\n* Give the attachment download test its own form ID\n\nBoth tests in test-form_version_attachment_download.R built the ID\nruodk_vattd_<timestamp>. The first test is short enough that the second\ncan compute the same second, then create the form after the first test\nsoft-deleted it. Central keeps deleted form IDs reserved and answers\nHTTP 400 (code 400.16, deletedFormExists). Use a distinct prefix.\n\n* Upload coverage only when Codecov accepts it\n\nCodecov rejects tokenless uploads for PR branches with HTTP 400\n(\"Token required because branch is protected\"), so test-coverage failed\nafter every test passed. Run the suite through covr::package_coverage()\nfirst: a test failure still fails the step. Then upload with\nCODECOV_TOKEN when it is set, or tokenless on pushes to the default\nbranch.\n\n* Give the draft attachment list test its own form ID\n\ntest-form_draft_attachment_link.R runs just before this file, uses\nruodk_dattl_<timestamp>, and deletes its form at exit. Both files could\nland in the same second, so the list test re-created a reserved,\nsoft-deleted ID and Central answered HTTP 400 (code 400.16,\ndeletedFormExists). Use its own prefix.\n\n---------\n\nCo-authored-by: florianm <762815+florianm@users.noreply.github.com>\nCo-authored-by: Florian Mayer <Florian.Mayer@eagleview.com>"
+  },
+  "repo": "https://github.com/ropensci/ruODK",
+  "pkg": "ruODK",
+  "time": "2026-11-24T04:27:30Z"
+}
